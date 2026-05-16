@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no"/>
 
 <title>Batty Little Blessings</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -14,42 +19,46 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-
     -webkit-tap-highlight-color:transparent;
 }
 
 html,
 body{
+
     width:100%;
     height:100%;
+
     overflow:hidden;
+
     position:fixed;
+
     touch-action:none;
 }
 
 body{
 
+    font-family:'Fredoka',sans-serif;
+
     display:flex;
     justify-content:center;
     align-items:center;
 
-    font-family:'Nunito',sans-serif;
-
     background:
         radial-gradient(circle at top,
-        #7b5ea7 0%,
-        #4c356b 35%,
-        #23172f 70%,
-        #17111f 100%);
-
-    color:white;
+        #c9a7ff 0%,
+        #9d7ae6 28%,
+        #6d57a8 58%,
+        #34244f 100%);
 
     overflow:hidden;
+
+    color:white;
 }
 
-/* dreamy glow background */
+/* dreamy background glow */
 
 body::before{
+
     content:"";
 
     position:absolute;
@@ -59,39 +68,40 @@ body::before{
 
     background:
         radial-gradient(circle,
-        rgba(255,182,255,.12) 0%,
+        rgba(255,255,255,.12) 0%,
         transparent 60%);
 
-    animation: floatGlow 28s linear infinite;
+    animation: glowFloat 30s linear infinite;
 }
 
-@keyframes floatGlow{
+@keyframes glowFloat{
 
     from{
-        transform:translate(-10%,-10%) rotate(0deg);
+        transform:translate(-8%,-8%) rotate(0deg);
     }
 
     to{
-        transform:translate(-20%,-15%) rotate(360deg);
+        transform:translate(-16%,-12%) rotate(360deg);
     }
 }
 
-/* stars & sparkles */
+/* stars */
 
-.sparkle{
+.star{
+
     position:absolute;
 
-    color:#ffd8ff;
+    color:#fff4ff;
+
+    opacity:.7;
 
     animation: twinkle 4s ease-in-out infinite;
-
-    opacity:.75;
 }
 
 @keyframes twinkle{
 
     0%,100%{
-        transform:scale(.7);
+        transform:scale(.8);
         opacity:.3;
     }
 
@@ -101,28 +111,122 @@ body::before{
     }
 }
 
-/* cute fruit bats */
+/* clouds */
+
+.cloud{
+
+    position:absolute;
+
+    background:rgba(255,255,255,.10);
+
+    border-radius:999px;
+
+    filter:blur(3px);
+}
+
+/* paka paka bats */
 
 .bat{
 
     position:absolute;
 
-    pointer-events:none;
+    width:95px;
+    height:95px;
 
-    filter:
-        drop-shadow(0 0 10px rgba(255,182,255,.45))
-        drop-shadow(0 0 20px rgba(255,150,255,.2));
+    border-radius:50%;
 
-    animation: drift linear infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
 
-    opacity:.95;
+    animation: floatBat linear infinite;
+
+    box-shadow:
+        0 0 25px rgba(255,182,255,.25);
+
+    z-index:2;
 }
 
-@keyframes drift{
+/* ears */
+
+.bat::before,
+.bat::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:28px;
+    height:28px;
+
+    border-radius:8px 8px 2px 2px;
+
+    top:-8px;
+
+    z-index:-1;
+}
+
+.bat::before{
+    left:10px;
+    transform:rotate(-18deg);
+}
+
+.bat::after{
+    right:10px;
+    transform:rotate(18deg);
+}
+
+/* wings */
+
+.wing-left,
+.wing-right{
+
+    position:absolute;
+
+    width:28px;
+    height:38px;
+
+    border-radius:40px;
+
+    top:28px;
+
+    opacity:.9;
+}
+
+.wing-left{
+    left:-16px;
+}
+
+.wing-right{
+    right:-16px;
+}
+
+/* face */
+
+.face{
+
+    font-size:1.1rem;
+
+    line-height:1.1;
+
+    text-align:center;
+}
+
+.fruit{
+
+    margin-top:5px;
+
+    font-size:1.4rem;
+}
+
+/* floating motion */
+
+@keyframes floatBat{
 
     0%{
         transform:
-            translateX(-180px)
+            translateX(-160px)
             translateY(0px)
             rotate(-3deg);
     }
@@ -130,7 +234,7 @@ body::before{
     25%{
         transform:
             translateX(25vw)
-            translateY(-15px)
+            translateY(-14px)
             rotate(3deg);
     }
 
@@ -144,7 +248,7 @@ body::before{
     75%{
         transform:
             translateX(75vw)
-            translateY(-12px)
+            translateY(-10px)
             rotate(2deg);
     }
 
@@ -156,91 +260,83 @@ body::before{
     }
 }
 
-/* main card */
+/* card */
 
 .container{
 
     position:relative;
+
     z-index:5;
 
-    width:min(92%,700px);
+    width:min(92%,680px);
 
-    padding:36px;
+    padding:34px;
 
     border-radius:36px;
 
-    background:rgba(44,28,58,.68);
+    background:rgba(82,54,120,.45);
 
-    backdrop-filter:blur(16px);
+    backdrop-filter:blur(18px);
 
-    border:2px solid rgba(255,255,255,.10);
-
-    box-shadow:
-        0 0 35px rgba(255,182,255,.14),
-        inset 0 0 25px rgba(255,255,255,.03);
+    border:2px solid rgba(255,255,255,.12);
 
     text-align:center;
+
+    box-shadow:
+        0 0 35px rgba(255,182,255,.18),
+        inset 0 0 20px rgba(255,255,255,.04);
 }
 
 /* title */
 
 .title{
 
-    font-family:'Fredoka',sans-serif;
-
     font-size:3rem;
 
-    color:#ffc6f2;
+    color:#ffe3ff;
 
-    margin-bottom:8px;
+    margin-bottom:10px;
 
     text-shadow:
-        0 0 12px rgba(255,182,255,.5);
+        0 0 12px rgba(255,255,255,.25);
 }
 
 .subtitle{
 
-    color:#f0d4ff;
+    color:#f7ddff;
 
-    margin-bottom:28px;
+    margin-bottom:26px;
 
     font-size:1rem;
-
-    letter-spacing:1px;
 }
 
 /* quote */
 
 .quote{
 
-    font-size:1.4rem;
+    font-size:1.35rem;
 
     line-height:1.8;
 
-    color:#fff5ff;
+    color:white;
 
-    min-height:150px;
+    min-height:140px;
 
-    margin-bottom:30px;
-
-    text-shadow:
-        0 0 10px rgba(255,255,255,.05);
+    margin-bottom:28px;
 }
 
 /* date/time */
 
 .date{
 
-    color:#ffc9eb;
+    color:#ffd7f3;
 
     margin-bottom:8px;
-
-    font-size:1rem;
 }
 
 .time{
 
-    color:#e8d8ff;
+    color:#f3e6ff;
 
     font-size:1.15rem;
 }
@@ -251,7 +347,7 @@ body::before{
 
     margin-top:22px;
 
-    color:#d6b7e8;
+    color:#e6c6ff;
 
     font-size:.85rem;
 }
@@ -261,16 +357,21 @@ body::before{
 @media(max-width:600px){
 
     .container{
-        padding:28px;
+        padding:26px;
     }
 
     .title{
-        font-size:2.3rem;
+        font-size:2.2rem;
     }
 
     .quote{
-        font-size:1.1rem;
+        font-size:1.05rem;
         min-height:120px;
+    }
+
+    .bat{
+        width:72px;
+        height:72px;
     }
 }
 
@@ -279,96 +380,129 @@ body::before{
 
 <body>
 
-<!-- sparkles -->
+<!-- stars -->
 
-<div class="sparkle" style="top:4%; left:10%; font-size:16px;">✦</div>
+<div class="star" style="top:6%; left:10%; font-size:18px;">✦</div>
+<div class="star" style="top:12%; left:85%; font-size:14px; animation-delay:1s;">✧</div>
+<div class="star" style="top:24%; left:72%; font-size:18px; animation-delay:2s;">✦</div>
+<div class="star" style="top:38%; left:5%; font-size:16px; animation-delay:3s;">✧</div>
+<div class="star" style="top:55%; left:92%; font-size:18px; animation-delay:1.5s;">✦</div>
+<div class="star" style="top:70%; left:14%; font-size:16px; animation-delay:2.7s;">✧</div>
+<div class="star" style="top:84%; left:78%; font-size:14px; animation-delay:1.2s;">✦</div>
 
-<div class="sparkle" style="top:10%; left:85%; font-size:20px; animation-delay:1s;">✧</div>
+<!-- clouds -->
 
-<div class="sparkle" style="top:20%; left:70%; font-size:14px; animation-delay:2s;">✦</div>
+<div class="cloud" style="width:180px; height:60px; top:8%; left:5%;"></div>
+<div class="cloud" style="width:220px; height:70px; bottom:10%; right:5%;"></div>
 
-<div class="sparkle" style="top:34%; left:8%; font-size:18px; animation-delay:3s;">✧</div>
+<!-- STRAWBERRY BAT -->
 
-<div class="sparkle" style="top:48%; left:90%; font-size:16px; animation-delay:1.5s;">✦</div>
+<div class="bat"
+style="
+top:8%;
+animation-duration:24s;
+background:#ff9ec7;
+">
 
-<div class="sparkle" style="top:65%; left:14%; font-size:20px; animation-delay:2.7s;">✧</div>
+<div class="wing-left" style="background:#ff84b5;"></div>
+<div class="wing-right" style="background:#ff84b5;"></div>
 
-<div class="sparkle" style="top:74%; left:80%; font-size:14px; animation-delay:1.2s;">✦</div>
-
-<div class="sparkle" style="top:90%; left:28%; font-size:18px; animation-delay:3.2s;">✧</div>
-
-<!-- cute pastel fruit bats -->
-
-<div class="bat" style="top:5%; animation-duration:22s; font-size:40px;">
-🍓🦇
+<div class="face">
+( •ᴥ• )
 </div>
 
-<div class="bat" style="top:14%; animation-duration:30s; animation-delay:-8s; font-size:32px;">
-🍇🦇
+<div class="fruit">🍓</div>
+
 </div>
 
-<div class="bat" style="top:22%; animation-duration:18s; animation-delay:-2s; font-size:26px;">
-🍑🦇
+<!-- GRAPE BAT -->
+
+<div class="bat"
+style="
+top:26%;
+animation-duration:32s;
+animation-delay:-8s;
+background:#c7a0ff;
+">
+
+<div class="wing-left" style="background:#b38cff;"></div>
+<div class="wing-right" style="background:#b38cff;"></div>
+
+<div class="face">
+( •◡• )
 </div>
 
-<div class="bat" style="top:30%; animation-duration:35s; animation-delay:-10s; font-size:46px;">
-🍒🦇
+<div class="fruit">🍇</div>
+
 </div>
 
-<div class="bat" style="top:40%; animation-duration:24s; animation-delay:-6s; font-size:34px;">
-🫐🦇
+<!-- PEACH BAT -->
+
+<div class="bat"
+style="
+top:48%;
+animation-duration:20s;
+animation-delay:-3s;
+background:#ffc7b5;
+">
+
+<div class="wing-left" style="background:#ffb19a;"></div>
+<div class="wing-right" style="background:#ffb19a;"></div>
+
+<div class="face">
+(｡･ω･｡)
 </div>
 
-<div class="bat" style="top:48%; animation-duration:28s; animation-delay:-14s; font-size:30px;">
-🍓🦇
+<div class="fruit">🍑</div>
+
 </div>
 
-<div class="bat" style="top:58%; animation-duration:20s; animation-delay:-4s; font-size:42px;">
-🍇🦇
+<!-- BLUEBERRY BAT -->
+
+<div class="bat"
+style="
+top:68%;
+animation-duration:28s;
+animation-delay:-12s;
+background:#9dc6ff;
+">
+
+<div class="wing-left" style="background:#83b6ff;"></div>
+<div class="wing-right" style="background:#83b6ff;"></div>
+
+<div class="face">
+( •⌄• )
 </div>
 
-<div class="bat" style="top:66%; animation-duration:38s; animation-delay:-18s; font-size:28px;">
-🍑🦇
+<div class="fruit">🫐</div>
+
 </div>
 
-<div class="bat" style="top:76%; animation-duration:26s; animation-delay:-9s; font-size:36px;">
-🍒🦇
-</div>
-
-<div class="bat" style="top:86%; animation-duration:32s; animation-delay:-15s; font-size:24px;">
-🫐🦇
-</div>
-
-<!-- main card -->
+<!-- MAIN CARD -->
 
 <div class="container">
 
-    <div class="title">
-        Batty Little Blessings
-    </div>
+<div class="title">
+Batty Little Blessings
+</div>
 
-    <div class="subtitle">
-        tiny fruit bats carrying gentle thoughts ✨
-    </div>
+<div class="subtitle">
+tiny fruit bats carrying gentle thoughts ✨
+</div>
 
-    <div class="quote" id="quote"></div>
+<div class="quote" id="quote"></div>
 
-    <div class="date" id="date"></div>
+<div class="date" id="date"></div>
 
-    <div class="time" id="time"></div>
+<div class="time" id="time"></div>
 
-    <div class="footer">
-        pastel skies • sleepy bats • soft healing
-    </div>
+<div class="footer">
+pastel skies • sleepy bats • soft healing
+</div>
 
 </div>
 
 <script>
-
-/*
-Add more quotes anytime.
-The site rotates automatically every day.
-*/
 
 const quotes = [
 
@@ -434,13 +568,13 @@ const quotes = [
 
 ];
 
-/* daily quote */
+/* quote of the day */
 
 function getQuoteOfTheDay(){
 
     const today = new Date();
 
-    const start = new Date(today.getFullYear(), 0, 0);
+    const start = new Date(today.getFullYear(),0,0);
 
     const diff = today - start;
 
@@ -452,15 +586,16 @@ function getQuoteOfTheDay(){
 }
 
 document.getElementById("quote").innerText =
-    `"${getQuoteOfTheDay()}"`;
+`"${getQuoteOfTheDay()}"`;
 
-/* clock */
+/* live time */
 
 function updateTime(){
 
     const now = new Date();
 
-    const dateOptions = {
+    const options = {
+
         weekday:'long',
         year:'numeric',
         month:'long',
@@ -468,14 +603,15 @@ function updateTime(){
     };
 
     document.getElementById("date").innerText =
-        now.toLocaleDateString(undefined, dateOptions);
+    now.toLocaleDateString(undefined, options);
 
     document.getElementById("time").innerText =
-        now.toLocaleTimeString([],{
-            hour:'2-digit',
-            minute:'2-digit',
-            second:'2-digit'
-        });
+    now.toLocaleTimeString([],{
+
+        hour:'2-digit',
+        minute:'2-digit',
+        second:'2-digit'
+    });
 }
 
 updateTime();
