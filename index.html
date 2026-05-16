@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
 <title>Batty Little Blessings</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -14,215 +14,246 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    position:fixed;
+    touch-action:none;
 }
 
 body{
-    overflow:hidden;
-    height:100vh;
-    width:100vw;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    font-family:'Quicksand',sans-serif;
+    font-family:'Nunito',sans-serif;
 
     background:
         radial-gradient(circle at top,
-        #5d4b73 0%,
-        #2b2038 40%,
-        #17121d 100%);
+        #7b5ea7 0%,
+        #4c356b 35%,
+        #23172f 70%,
+        #17111f 100%);
 
     color:white;
 
-    position:relative;
+    overflow:hidden;
 }
 
-/* dreamy moving glow */
+/* dreamy glow background */
+
 body::before{
     content:"";
+
     position:absolute;
-    width:200%;
-    height:200%;
+
+    width:180%;
+    height:180%;
 
     background:
         radial-gradient(circle,
-        rgba(255,192,255,.10) 0%,
-        transparent 55%);
+        rgba(255,182,255,.12) 0%,
+        transparent 60%);
 
-    animation: fog 24s linear infinite;
+    animation: floatGlow 28s linear infinite;
 }
 
-@keyframes fog{
+@keyframes floatGlow{
 
-    0%{
+    from{
         transform:translate(-10%,-10%) rotate(0deg);
     }
 
-    100%{
+    to{
         transform:translate(-20%,-15%) rotate(360deg);
     }
 }
 
-/* sparkles */
+/* stars & sparkles */
 
 .sparkle{
     position:absolute;
-    font-size:16px;
-    color:#ffd9ff;
-    opacity:.7;
+
+    color:#ffd8ff;
 
     animation: twinkle 4s ease-in-out infinite;
+
+    opacity:.75;
 }
 
 @keyframes twinkle{
 
     0%,100%{
-        transform:scale(.6);
-        opacity:.25;
+        transform:scale(.7);
+        opacity:.3;
     }
 
     50%{
-        transform:scale(1.3);
+        transform:scale(1.4);
         opacity:1;
     }
 }
 
-/* floating bats */
+/* cute fruit bats */
 
 .bat{
+
     position:absolute;
-
-    opacity:.78;
-
-    filter:
-        drop-shadow(0 0 10px rgba(255,192,255,.6))
-        drop-shadow(0 0 22px rgba(205,155,255,.25));
 
     pointer-events:none;
 
-    animation: fly linear infinite;
+    filter:
+        drop-shadow(0 0 10px rgba(255,182,255,.45))
+        drop-shadow(0 0 20px rgba(255,150,255,.2));
+
+    animation: drift linear infinite;
+
+    opacity:.95;
 }
 
-@keyframes fly{
+@keyframes drift{
 
     0%{
         transform:
-            translateX(-150px)
+            translateX(-180px)
             translateY(0px)
-            rotate(0deg);
+            rotate(-3deg);
     }
 
     25%{
         transform:
             translateX(25vw)
-            translateY(-20px)
-            rotate(-4deg);
+            translateY(-15px)
+            rotate(3deg);
     }
 
     50%{
         transform:
             translateX(50vw)
-            translateY(18px)
-            rotate(4deg);
+            translateY(10px)
+            rotate(-2deg);
     }
 
     75%{
         transform:
             translateX(75vw)
-            translateY(-15px)
-            rotate(-3deg);
+            translateY(-12px)
+            rotate(2deg);
     }
 
     100%{
         transform:
             translateX(120vw)
-            translateY(10px)
-            rotate(2deg);
+            translateY(5px)
+            rotate(-2deg);
     }
 }
 
-/* quote container */
+/* main card */
 
 .container{
+
     position:relative;
     z-index:5;
 
-    width:min(92%,680px);
+    width:min(92%,700px);
 
-    padding:42px;
+    padding:36px;
 
-    border-radius:30px;
+    border-radius:36px;
 
-    background:rgba(31,22,40,.58);
+    background:rgba(44,28,58,.68);
 
-    backdrop-filter:blur(14px);
+    backdrop-filter:blur(16px);
 
-    border:1px solid rgba(255,255,255,.12);
+    border:2px solid rgba(255,255,255,.10);
 
     box-shadow:
-        0 0 35px rgba(255,182,255,.18),
-        inset 0 0 22px rgba(255,255,255,.04);
+        0 0 35px rgba(255,182,255,.14),
+        inset 0 0 25px rgba(255,255,255,.03);
 
     text-align:center;
 }
 
+/* title */
+
 .title{
-    font-family:'Cormorant Garamond',serif;
 
-    font-size:3.2rem;
+    font-family:'Fredoka',sans-serif;
 
-    color:#ffc5f2;
+    font-size:3rem;
+
+    color:#ffc6f2;
+
+    margin-bottom:8px;
 
     text-shadow:
-        0 0 10px rgba(255,182,255,.5);
-
-    margin-bottom:10px;
+        0 0 12px rgba(255,182,255,.5);
 }
 
 .subtitle{
-    color:#e7cfff;
+
+    color:#f0d4ff;
 
     margin-bottom:28px;
+
+    font-size:1rem;
 
     letter-spacing:1px;
 }
 
-.quote{
-    font-size:1.45rem;
+/* quote */
 
-    line-height:1.9;
+.quote{
+
+    font-size:1.4rem;
+
+    line-height:1.8;
 
     color:#fff5ff;
 
+    min-height:150px;
+
     margin-bottom:30px;
 
-    min-height:170px;
-
     text-shadow:
-        0 0 10px rgba(255,255,255,.06);
+        0 0 10px rgba(255,255,255,.05);
 }
 
-.date{
-    color:#ffc8e9;
+/* date/time */
 
-    margin-bottom:10px;
+.date{
+
+    color:#ffc9eb;
+
+    margin-bottom:8px;
 
     font-size:1rem;
 }
 
 .time{
-    color:#ead5ff;
+
+    color:#e8d8ff;
 
     font-size:1.15rem;
 }
 
+/* footer */
+
 .footer{
-    margin-top:25px;
 
-    font-size:.9rem;
+    margin-top:22px;
 
-    color:#d2b4df;
+    color:#d6b7e8;
+
+    font-size:.85rem;
 }
 
 /* mobile */
@@ -238,10 +269,9 @@ body::before{
     }
 
     .quote{
-        font-size:1.15rem;
-        min-height:140px;
+        font-size:1.1rem;
+        min-height:120px;
     }
-
 }
 
 </style>
@@ -251,47 +281,65 @@ body::before{
 
 <!-- sparkles -->
 
-<div class="sparkle" style="top:5%; left:12%;">✦</div>
-<div class="sparkle" style="top:15%; left:75%; animation-delay:1s;">✧</div>
-<div class="sparkle" style="top:25%; left:92%; animation-delay:2s;">✦</div>
-<div class="sparkle" style="top:35%; left:5%; animation-delay:3s;">✧</div>
-<div class="sparkle" style="top:48%; left:84%; animation-delay:1.5s;">✦</div>
-<div class="sparkle" style="top:60%; left:15%; animation-delay:2.8s;">✧</div>
-<div class="sparkle" style="top:70%; left:90%; animation-delay:1.3s;">✦</div>
-<div class="sparkle" style="top:82%; left:28%; animation-delay:2.2s;">✧</div>
-<div class="sparkle" style="top:90%; left:70%; animation-delay:3.5s;">✦</div>
+<div class="sparkle" style="top:4%; left:10%; font-size:16px;">✦</div>
 
-<!-- LOTS OF FLOATING BATS -->
+<div class="sparkle" style="top:10%; left:85%; font-size:20px; animation-delay:1s;">✧</div>
 
-<div class="bat" style="top:4%; animation-duration:20s; font-size:20px;">🦇</div>
+<div class="sparkle" style="top:20%; left:70%; font-size:14px; animation-delay:2s;">✦</div>
 
-<div class="bat" style="top:10%; animation-duration:28s; animation-delay:-8s; font-size:36px;">🦇</div>
+<div class="sparkle" style="top:34%; left:8%; font-size:18px; animation-delay:3s;">✧</div>
 
-<div class="bat" style="top:16%; animation-duration:18s; animation-delay:-2s; font-size:18px;">🦇</div>
+<div class="sparkle" style="top:48%; left:90%; font-size:16px; animation-delay:1.5s;">✦</div>
 
-<div class="bat" style="top:22%; animation-duration:34s; animation-delay:-14s; font-size:24px;">🦇</div>
+<div class="sparkle" style="top:65%; left:14%; font-size:20px; animation-delay:2.7s;">✧</div>
 
-<div class="bat" style="top:30%; animation-duration:22s; animation-delay:-4s; font-size:30px;">🦇</div>
+<div class="sparkle" style="top:74%; left:80%; font-size:14px; animation-delay:1.2s;">✦</div>
 
-<div class="bat" style="top:38%; animation-duration:26s; animation-delay:-10s; font-size:22px;">🦇</div>
+<div class="sparkle" style="top:90%; left:28%; font-size:18px; animation-delay:3.2s;">✧</div>
 
-<div class="bat" style="top:46%; animation-duration:16s; animation-delay:-6s; font-size:28px;">🦇</div>
+<!-- cute pastel fruit bats -->
 
-<div class="bat" style="top:52%; animation-duration:38s; animation-delay:-18s; font-size:42px;">🦇</div>
+<div class="bat" style="top:5%; animation-duration:22s; font-size:40px;">
+🍓🦇
+</div>
 
-<div class="bat" style="top:58%; animation-duration:21s; animation-delay:-12s; font-size:20px;">🦇</div>
+<div class="bat" style="top:14%; animation-duration:30s; animation-delay:-8s; font-size:32px;">
+🍇🦇
+</div>
 
-<div class="bat" style="top:64%; animation-duration:27s; animation-delay:-7s; font-size:34px;">🦇</div>
+<div class="bat" style="top:22%; animation-duration:18s; animation-delay:-2s; font-size:26px;">
+🍑🦇
+</div>
 
-<div class="bat" style="top:72%; animation-duration:19s; animation-delay:-3s; font-size:18px;">🦇</div>
+<div class="bat" style="top:30%; animation-duration:35s; animation-delay:-10s; font-size:46px;">
+🍒🦇
+</div>
 
-<div class="bat" style="top:78%; animation-duration:30s; animation-delay:-16s; font-size:38px;">🦇</div>
+<div class="bat" style="top:40%; animation-duration:24s; animation-delay:-6s; font-size:34px;">
+🫐🦇
+</div>
 
-<div class="bat" style="top:84%; animation-duration:24s; animation-delay:-5s; font-size:26px;">🦇</div>
+<div class="bat" style="top:48%; animation-duration:28s; animation-delay:-14s; font-size:30px;">
+🍓🦇
+</div>
 
-<div class="bat" style="top:90%; animation-duration:32s; animation-delay:-20s; font-size:32px;">🦇</div>
+<div class="bat" style="top:58%; animation-duration:20s; animation-delay:-4s; font-size:42px;">
+🍇🦇
+</div>
 
-<!-- main content -->
+<div class="bat" style="top:66%; animation-duration:38s; animation-delay:-18s; font-size:28px;">
+🍑🦇
+</div>
+
+<div class="bat" style="top:76%; animation-duration:26s; animation-delay:-9s; font-size:36px;">
+🍒🦇
+</div>
+
+<div class="bat" style="top:86%; animation-duration:32s; animation-delay:-15s; font-size:24px;">
+🫐🦇
+</div>
+
+<!-- main card -->
 
 <div class="container">
 
@@ -300,7 +348,7 @@ body::before{
     </div>
 
     <div class="subtitle">
-        soft gothic comfort for wandering souls ✨
+        tiny fruit bats carrying gentle thoughts ✨
     </div>
 
     <div class="quote" id="quote"></div>
@@ -310,7 +358,7 @@ body::before{
     <div class="time" id="time"></div>
 
     <div class="footer">
-        made with moonlight, sparkles, and tiny bats
+        pastel skies • sleepy bats • soft healing
     </div>
 
 </div>
@@ -318,8 +366,8 @@ body::before{
 <script>
 
 /*
-The site automatically rotates quotes every day.
-Add as many quotes as you want forever.
+Add more quotes anytime.
+The site rotates automatically every day.
 */
 
 const quotes = [
@@ -386,7 +434,7 @@ const quotes = [
 
 ];
 
-/* quote rotation */
+/* daily quote */
 
 function getQuoteOfTheDay(){
 
@@ -406,7 +454,7 @@ function getQuoteOfTheDay(){
 document.getElementById("quote").innerText =
     `"${getQuoteOfTheDay()}"`;
 
-/* live clock */
+/* clock */
 
 function updateTime(){
 
@@ -423,7 +471,7 @@ function updateTime(){
         now.toLocaleDateString(undefined, dateOptions);
 
     document.getElementById("time").innerText =
-        now.toLocaleTimeString([], {
+        now.toLocaleTimeString([],{
             hour:'2-digit',
             minute:'2-digit',
             second:'2-digit'
