@@ -1,624 +1,1702 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no"/>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
-<title>Batty Little Blessings</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Little Bat Blessings</title>
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
+/* =========================================================
+   COLORS
+========================================================= */
+
+:root {
+    --night: #0d0912;
+    --deep-plum: #181020;
+    --plum: #24162f;
+
+    --lavender: #c8a8d8;
+    --soft-lavender: #ddc5e8;
+
+    --pink: #e3a9c7;
+    --soft-pink: #f3c9dc;
+
+    --white: #faeff8;
+    --muted: #bba7c0;
+}
+
+
+/* =========================================================
+   RESET / NO SCROLLING
+========================================================= */
+
+* {
+    box-sizing: border-box;
 }
 
 html,
-body{
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 
-    width:100%;
-    height:100%;
+    overflow: hidden;
 
-    overflow:hidden;
-
-    position:fixed;
-
-    touch-action:none;
+    overscroll-behavior: none;
 }
 
-body{
+body {
+    min-height: 100dvh;
+    width: 100vw;
 
-    font-family:'Fredoka',sans-serif;
+    font-family: "Quicksand", sans-serif;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    color: var(--white);
 
     background:
-        radial-gradient(circle at top,
-        #c9a7ff 0%,
-        #9d7ae6 28%,
-        #6d57a8 58%,
-        #34244f 100%);
+        radial-gradient(
+            ellipse at 50% -20%,
+            #493052 0%,
+            #281a34 35%,
+            var(--night) 75%
+        );
 
-    overflow:hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    color:white;
+    position: relative;
+
+    isolation: isolate;
 }
 
-/* dreamy background glow */
 
-body::before{
+/* =========================================================
+   BACKGROUND GLOW
+========================================================= */
 
-    content:"";
+body::before {
 
-    position:absolute;
+    content: "";
 
-    width:180%;
-    height:180%;
+    position: absolute;
+
+    inset: -30%;
+
+    z-index: -5;
 
     background:
-        radial-gradient(circle,
-        rgba(255,255,255,.12) 0%,
-        transparent 60%);
 
-    animation: glowFloat 30s linear infinite;
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(206, 157, 224, .12),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(231, 158, 197, .10),
+            transparent 30%
+        );
+
+    animation:
+        backgroundDrift 20s ease-in-out infinite alternate;
 }
 
-@keyframes glowFloat{
+@keyframes backgroundDrift {
 
-    from{
-        transform:translate(-8%,-8%) rotate(0deg);
+    from {
+        transform:
+            translate(-2%, -2%)
+            scale(1);
     }
 
-    to{
-        transform:translate(-16%,-12%) rotate(360deg);
-    }
-}
-
-/* stars */
-
-.star{
-
-    position:absolute;
-
-    color:#fff4ff;
-
-    opacity:.7;
-
-    animation: twinkle 4s ease-in-out infinite;
-}
-
-@keyframes twinkle{
-
-    0%,100%{
-        transform:scale(.8);
-        opacity:.3;
-    }
-
-    50%{
-        transform:scale(1.4);
-        opacity:1;
+    to {
+        transform:
+            translate(2%, 2%)
+            scale(1.05);
     }
 }
 
-/* clouds */
 
-.cloud{
+/* =========================================================
+   MOON
+========================================================= */
 
-    position:absolute;
+.moon {
 
-    background:rgba(255,255,255,.10);
+    position: absolute;
 
-    border-radius:999px;
+    width: clamp(90px, 15vw, 180px);
+    aspect-ratio: 1;
 
-    filter:blur(3px);
-}
+    top: 5%;
+    right: 7%;
 
-/* paka paka bats */
+    border-radius: 50%;
 
-.bat{
-
-    position:absolute;
-
-    width:95px;
-    height:95px;
-
-    border-radius:50%;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-
-    animation: floatBat linear infinite;
+    background:
+        radial-gradient(
+            circle at 35% 35%,
+            #f9eafa,
+            #d8b8e5 60%,
+            #a984bb
+        );
 
     box-shadow:
-        0 0 25px rgba(255,182,255,.25);
+        0 0 30px rgba(225, 188, 240, .30),
+        0 0 80px rgba(193, 140, 215, .12);
 
-    z-index:2;
+    opacity: .68;
 }
 
-/* ears */
+.moon::after {
 
-.bat::before,
-.bat::after{
+    content: "";
 
-    content:"";
+    position: absolute;
 
-    position:absolute;
+    width: 100%;
+    height: 100%;
 
-    width:28px;
-    height:28px;
+    border-radius: 50%;
 
-    border-radius:8px 8px 2px 2px;
+    background: var(--night);
 
-    top:-8px;
-
-    z-index:-1;
+    transform:
+        translate(28%, -12%);
 }
 
-.bat::before{
-    left:10px;
-    transform:rotate(-18deg);
+
+/* =========================================================
+   SPARKLES
+========================================================= */
+
+.sparkle {
+
+    position: absolute;
+
+    color: #f3c8e6;
+
+    font-size:
+        clamp(10px, 1.5vw, 18px);
+
+    opacity: .65;
+
+    pointer-events: none;
+
+    animation:
+        sparkle 3s ease-in-out infinite;
 }
 
-.bat::after{
-    right:10px;
-    transform:rotate(18deg);
-}
+@keyframes sparkle {
 
-/* wings */
-
-.wing-left,
-.wing-right{
-
-    position:absolute;
-
-    width:28px;
-    height:38px;
-
-    border-radius:40px;
-
-    top:28px;
-
-    opacity:.9;
-}
-
-.wing-left{
-    left:-16px;
-}
-
-.wing-right{
-    right:-16px;
-}
-
-/* face */
-
-.face{
-
-    font-size:1.1rem;
-
-    line-height:1.1;
-
-    text-align:center;
-}
-
-.fruit{
-
-    margin-top:5px;
-
-    font-size:1.4rem;
-}
-
-/* floating motion */
-
-@keyframes floatBat{
-
-    0%{
+    0%,
+    100% {
+        opacity: .25;
         transform:
-            translateX(-160px)
-            translateY(0px)
-            rotate(-3deg);
+            scale(.7)
+            rotate(0deg);
     }
 
-    25%{
+    50% {
+        opacity: 1;
         transform:
-            translateX(25vw)
-            translateY(-14px)
-            rotate(3deg);
+            scale(1.2)
+            rotate(20deg);
+    }
+}
+
+
+/* =========================================================
+   FLYING BATS
+========================================================= */
+
+.flying-bat {
+
+    position: absolute;
+
+    width: 48px;
+    height: 28px;
+
+    opacity: .55;
+
+    pointer-events: none;
+
+    animation:
+        flyAcross linear infinite;
+
+    filter:
+        drop-shadow(
+            0 0 6px
+            rgba(188, 135, 211, .35)
+        );
+}
+
+
+/* Bat wings */
+
+.flying-bat::before,
+.flying-bat::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 5px;
+
+    width: 29px;
+    height: 21px;
+
+    background: #08060c;
+
+    border-radius:
+        70% 15% 70% 15%;
+}
+
+.flying-bat::before {
+
+    left: 0;
+
+    transform:
+        rotate(20deg)
+        skewY(12deg);
+}
+
+.flying-bat::after {
+
+    right: 0;
+
+    transform:
+        rotate(-20deg)
+        skewY(-12deg);
+}
+
+
+/* Bat body */
+
+.bat-body {
+
+    position: absolute;
+
+    width: 13px;
+    height: 22px;
+
+    left: 50%;
+    top: 4px;
+
+    transform:
+        translateX(-50%);
+
+    background: #08060c;
+
+    border-radius:
+        45% 45% 50% 50%;
+
+    z-index: 2;
+}
+
+
+/* Bat ears */
+
+.bat-ear {
+
+    position: absolute;
+
+    width: 6px;
+    height: 9px;
+
+    top: 0;
+
+    background: #08060c;
+
+    z-index: 3;
+}
+
+.bat-ear.left {
+
+    left: 17px;
+
+    transform:
+        rotate(-20deg);
+}
+
+.bat-ear.right {
+
+    right: 17px;
+
+    transform:
+        rotate(20deg);
+}
+
+
+@keyframes flyAcross {
+
+    from {
+
+        transform:
+            translateX(-120px)
+            translateY(0)
+            scale(.7);
     }
 
-    50%{
+    50% {
+
         transform:
             translateX(50vw)
-            translateY(10px)
-            rotate(-2deg);
+            translateY(-25px)
+            scale(1);
     }
 
-    75%{
-        transform:
-            translateX(75vw)
-            translateY(-10px)
-            rotate(2deg);
-    }
+    to {
 
-    100%{
         transform:
-            translateX(120vw)
-            translateY(5px)
-            rotate(-2deg);
+            translateX(110vw)
+            translateY(15px)
+            scale(.8);
     }
 }
 
-/* card */
 
-.container{
+/* =========================================================
+   MAIN CARD
+========================================================= */
 
-    position:relative;
+.main {
 
-    z-index:5;
+    width: min(90vw, 720px);
 
-    width:min(92%,680px);
+    max-height: 82dvh;
 
-    padding:34px;
+    padding:
+        clamp(24px, 5vw, 50px);
 
-    border-radius:36px;
+    border-radius: 32px;
 
-    background:rgba(82,54,120,.45);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(50, 35, 61, .74),
+            rgba(18, 12, 24, .86)
+        );
 
-    backdrop-filter:blur(18px);
-
-    border:2px solid rgba(255,255,255,.12);
-
-    text-align:center;
+    border:
+        1px solid
+        rgba(232, 195, 239, .17);
 
     box-shadow:
-        0 0 35px rgba(255,182,255,.18),
-        inset 0 0 20px rgba(255,255,255,.04);
+
+        0 0 50px
+        rgba(185, 139, 207, .10),
+
+        inset 0 0 40px
+        rgba(255, 220, 248, .025);
+
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
+
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 10;
 }
 
-/* title */
 
-.title{
+/* =========================================================
+   TITLE
+========================================================= */
 
-    font-size:3rem;
+.title {
 
-    color:#ffe3ff;
+    font-family:
+        "Cormorant Garamond",
+        serif;
 
-    margin-bottom:10px;
+    font-size:
+        clamp(2.3rem, 7vw, 4.2rem);
+
+    line-height: .9;
+
+    color:
+        var(--soft-pink);
 
     text-shadow:
-        0 0 12px rgba(255,255,255,.25);
+        0 0 15px
+        rgba(235, 168, 210, .30);
+
+    margin-bottom: 10px;
 }
 
-.subtitle{
 
-    color:#f7ddff;
+.subtitle {
 
-    margin-bottom:26px;
+    font-size:
+        clamp(.72rem, 2vw, .95rem);
 
-    font-size:1rem;
+    letter-spacing:
+        .14em;
+
+    text-transform:
+        lowercase;
+
+    color:
+        var(--muted);
+
+    margin-bottom:
+        clamp(18px, 3vw, 30px);
 }
 
-/* quote */
 
-.quote{
+/* =========================================================
+   MAIN DAILY QUOTE
+========================================================= */
 
-    font-size:1.35rem;
+.quote {
 
-    line-height:1.8;
+    font-family:
+        "Cormorant Garamond",
+        serif;
 
-    color:white;
+    font-size:
+        clamp(1.35rem, 4vw, 2.05rem);
 
-    min-height:140px;
+    line-height:
+        1.38;
 
-    margin-bottom:28px;
+    max-width: 620px;
+
+    color:
+        #fff3fb;
+
+    text-shadow:
+        0 0 12px
+        rgba(255, 220, 245, .08);
+
+    margin: 0;
 }
 
-/* date/time */
+.quote::before {
 
-.date{
+    content: "“";
 
-    color:#ffd7f3;
+    color:
+        var(--pink);
 
-    margin-bottom:8px;
+    font-size:
+        1.6em;
+
+    vertical-align:
+        -.2em;
+
+    margin-right: 5px;
 }
 
-.time{
+.quote::after {
 
-    color:#f3e6ff;
+    content: "”";
 
-    font-size:1.15rem;
+    color:
+        var(--pink);
+
+    font-size:
+        1.6em;
+
+    vertical-align:
+        -.2em;
+
+    margin-left: 5px;
 }
 
-/* footer */
 
-.footer{
+/* =========================================================
+   DATE / TIME
+========================================================= */
 
-    margin-top:22px;
+.date {
 
-    color:#e6c6ff;
+    margin-top: 22px;
 
-    font-size:.85rem;
+    font-size: .85rem;
+
+    color:
+        var(--pink);
+
+    letter-spacing:
+        .08em;
 }
 
-/* mobile */
+.time {
 
-@media(max-width:600px){
+    margin-top: 4px;
 
-    .container{
-        padding:26px;
+    font-size: .75rem;
+
+    color:
+        var(--muted);
+
+    letter-spacing:
+        .05em;
+}
+
+
+/* =========================================================
+   LITTLE CORNER BAT
+========================================================= */
+
+.bat-friend {
+
+    position: fixed;
+
+    left:
+        clamp(12px, 4vw, 45px);
+
+    bottom:
+        clamp(12px, 4vw, 40px);
+
+    width:
+        clamp(105px, 25vw, 165px);
+
+    z-index: 20;
+
+    animation:
+        littleBatFloat 4s ease-in-out infinite;
+
+    pointer-events: none;
+}
+
+@keyframes littleBatFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
     }
 
-    .title{
-        font-size:2.2rem;
+    50% {
+        transform:
+            translateY(-7px);
+    }
+}
+
+
+/* =========================================================
+   LITTLE BAT BODY
+========================================================= */
+
+.friend-body {
+
+    position: relative;
+
+    width: 80px;
+    height: 55px;
+
+    margin: auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            #24182d,
+            #09070d
+        );
+
+    border-radius:
+        50% 50% 45% 45%;
+
+    box-shadow:
+        0 0 12px
+        rgba(193, 137, 215, .22);
+
+    pointer-events: none;
+}
+
+
+/* Little bat wings */
+
+.friend-body::before,
+.friend-body::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 5px;
+
+    width: 57px;
+    height: 43px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #30203a,
+            #0c0910
+        );
+
+    z-index: -1;
+}
+
+.friend-body::before {
+
+    right: 60px;
+
+    border-radius:
+        80% 10% 70% 20%;
+
+    transform:
+        rotate(10deg);
+}
+
+.friend-body::after {
+
+    left: 60px;
+
+    border-radius:
+        10% 80% 20% 70%;
+
+    transform:
+        rotate(-10deg);
+}
+
+
+/* Ears */
+
+.ear {
+
+    position: absolute;
+
+    top: -15px;
+
+    width: 18px;
+    height: 25px;
+
+    background:
+        #100b15;
+
+    clip-path:
+        polygon(
+            50% 0%,
+            100% 100%,
+            0% 100%
+        );
+}
+
+.ear.left {
+    left: 17px;
+}
+
+.ear.right {
+    right: 17px;
+}
+
+
+/* Eyes */
+
+.eye {
+
+    position: absolute;
+
+    top: 24px;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background:
+        #efb8d8;
+
+    box-shadow:
+        0 0 8px
+        rgba(239, 184, 216, .8);
+}
+
+.eye.left {
+    left: 27px;
+}
+
+.eye.right {
+    right: 27px;
+}
+
+
+/* Tiny smile */
+
+.smile {
+
+    position: absolute;
+
+    width: 13px;
+    height: 7px;
+
+    left: 50%;
+    top: 33px;
+
+    transform:
+        translateX(-50%);
+
+    border-bottom:
+        2px solid
+        #c79acb;
+
+    border-radius:
+        0 0 50% 50%;
+}
+
+
+/* =========================================================
+   CLICKABLE THOUGHT BUBBLE
+========================================================= */
+
+.thought {
+
+    position: absolute;
+
+    left: 75px;
+    bottom: 65px;
+
+    width:
+        clamp(130px, 30vw, 190px);
+
+    padding:
+        10px 13px;
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(242, 213, 244, .94);
+
+    color:
+        #35243b;
+
+    font-family:
+        "Quicksand",
+        sans-serif;
+
+    font-size:
+        clamp(.65rem, 2vw, .78rem);
+
+    line-height:
+        1.25;
+
+    border:
+        none;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, .22);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+
+    z-index: 5;
+
+    pointer-events: auto;
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+
+/* Thought bubble tail */
+
+.thought::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 8px;
+    bottom: -9px;
+
+    width: 18px;
+    height: 18px;
+
+    background:
+        rgba(242, 213, 244, .94);
+
+    border-radius: 50%;
+}
+
+
+/* Tap effect */
+
+.thought:hover {
+
+    transform:
+        translateY(-2px)
+        scale(1.02);
+
+    box-shadow:
+        0 7px 24px
+        rgba(0, 0, 0, .28);
+}
+
+.thought:active {
+
+    transform:
+        scale(.96);
+}
+
+
+/* =========================================================
+   HIDDEN DAILY ADVICE
+========================================================= */
+
+.advice {
+
+    position: absolute;
+
+    left: 75px;
+    bottom: 5px;
+
+    width:
+        clamp(150px, 35vw, 230px);
+
+    padding:
+        9px 12px;
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(27, 19, 34, .95);
+
+    border:
+        1px solid
+        rgba(229, 177, 219, .25);
+
+    color:
+        #ead4ec;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(.72rem, 2vw, .9rem);
+
+    line-height:
+        1.3;
+
+    box-shadow:
+        0 0 15px
+        rgba(183, 132, 202, .08);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(8px)
+        scale(.96);
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease,
+        visibility .35s ease;
+
+    pointer-events: none;
+}
+
+
+/* Show advice after tapping */
+
+.bat-friend.show-advice .advice {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .moon {
+
+        top: 2%;
+        right: -30px;
+
+        opacity: .42;
     }
 
-    .quote{
-        font-size:1.05rem;
-        min-height:120px;
+    .main {
+
+        width: 92vw;
+
+        padding:
+            28px 20px 24px;
+
+        border-radius:
+            25px;
     }
 
-    .bat{
-        width:72px;
-        height:72px;
+    .subtitle {
+
+        margin-bottom: 16px;
+    }
+
+    .date {
+
+        margin-top: 15px;
+    }
+
+    .thought {
+
+        left: 60px;
+        bottom: 55px;
+    }
+
+    .advice {
+
+        left: 55px;
+        bottom: -4px;
+    }
+}
+
+
+/* =========================================================
+   VERY SHORT SCREENS
+========================================================= */
+
+@media (max-height: 650px) {
+
+    .main {
+
+        padding: 18px;
+    }
+
+    .subtitle {
+
+        margin-bottom: 10px;
+    }
+
+    .date {
+
+        margin-top: 10px;
+    }
+
+    .bat-friend {
+
+        transform:
+            scale(.78);
+
+        transform-origin:
+            bottom left;
     }
 }
 
 </style>
 </head>
 
+
 <body>
 
-<!-- stars -->
 
-<div class="star" style="top:6%; left:10%; font-size:18px;">✦</div>
-<div class="star" style="top:12%; left:85%; font-size:14px; animation-delay:1s;">✧</div>
-<div class="star" style="top:24%; left:72%; font-size:18px; animation-delay:2s;">✦</div>
-<div class="star" style="top:38%; left:5%; font-size:16px; animation-delay:3s;">✧</div>
-<div class="star" style="top:55%; left:92%; font-size:18px; animation-delay:1.5s;">✦</div>
-<div class="star" style="top:70%; left:14%; font-size:16px; animation-delay:2.7s;">✧</div>
-<div class="star" style="top:84%; left:78%; font-size:14px; animation-delay:1.2s;">✦</div>
+<!-- =======================================================
+     MOON
+======================================================= -->
 
-<!-- clouds -->
+<div class="moon"></div>
 
-<div class="cloud" style="width:180px; height:60px; top:8%; left:5%;"></div>
-<div class="cloud" style="width:220px; height:70px; bottom:10%; right:5%;"></div>
 
-<!-- STRAWBERRY BAT -->
+<!-- =======================================================
+     SPARKLES
+======================================================= -->
 
-<div class="bat"
-style="
-top:8%;
-animation-duration:24s;
-background:#ff9ec7;
-">
-
-<div class="wing-left" style="background:#ff84b5;"></div>
-<div class="wing-right" style="background:#ff84b5;"></div>
-
-<div class="face">
-( •ᴥ• )
+<div class="sparkle"
+     style="top:12%;left:12%;">
+    ✦
 </div>
 
-<div class="fruit">🍓</div>
-
+<div class="sparkle"
+     style="top:25%;left:73%;animation-delay:1s;">
+    ✧
 </div>
 
-<!-- GRAPE BAT -->
-
-<div class="bat"
-style="
-top:26%;
-animation-duration:32s;
-animation-delay:-8s;
-background:#c7a0ff;
-">
-
-<div class="wing-left" style="background:#b38cff;"></div>
-<div class="wing-right" style="background:#b38cff;"></div>
-
-<div class="face">
-( •◡• )
+<div class="sparkle"
+     style="top:65%;left:8%;animation-delay:2s;">
+    ✦
 </div>
 
-<div class="fruit">🍇</div>
-
+<div class="sparkle"
+     style="top:75%;right:12%;animation-delay:.5s;">
+    ✧
 </div>
 
-<!-- PEACH BAT -->
-
-<div class="bat"
-style="
-top:48%;
-animation-duration:20s;
-animation-delay:-3s;
-background:#ffc7b5;
-">
-
-<div class="wing-left" style="background:#ffb19a;"></div>
-<div class="wing-right" style="background:#ffb19a;"></div>
-
-<div class="face">
-(｡･ω･｡)
+<div class="sparkle"
+     style="top:42%;left:4%;animation-delay:1.8s;">
+    ⋆
 </div>
 
-<div class="fruit">🍑</div>
+<div class="sparkle"
+     style="top:18%;right:28%;animation-delay:2.5s;">
+    ✦
+</div>
+
+<div class="sparkle"
+     style="bottom:20%;right:25%;animation-delay:1.3s;">
+    ✧
+</div>
+
+
+<!-- =======================================================
+     FLYING BATS
+======================================================= -->
+
+<div class="flying-bat"
+     style="top:18%;animation-duration:24s;">
+
+    <div class="bat-body"></div>
+
+    <div class="bat-ear left"></div>
+    <div class="bat-ear right"></div>
 
 </div>
 
-<!-- BLUEBERRY BAT -->
 
-<div class="bat"
-style="
-top:68%;
-animation-duration:28s;
-animation-delay:-12s;
-background:#9dc6ff;
-">
+<div class="flying-bat"
+     style="top:42%;animation-duration:31s;animation-delay:-11s;">
 
-<div class="wing-left" style="background:#83b6ff;"></div>
-<div class="wing-right" style="background:#83b6ff;"></div>
+    <div class="bat-body"></div>
 
-<div class="face">
-( •⌄• )
-</div>
-
-<div class="fruit">🫐</div>
+    <div class="bat-ear left"></div>
+    <div class="bat-ear right"></div>
 
 </div>
 
-<!-- MAIN CARD -->
 
-<div class="container">
+<div class="flying-bat"
+     style="top:70%;animation-duration:27s;animation-delay:-19s;">
 
-<div class="title">
-Batty Little Blessings
-</div>
+    <div class="bat-body"></div>
 
-<div class="subtitle">
-tiny fruit bats carrying gentle thoughts ✨
-</div>
-
-<div class="quote" id="quote"></div>
-
-<div class="date" id="date"></div>
-
-<div class="time" id="time"></div>
-
-<div class="footer">
-pastel skies • sleepy bats • soft healing
-</div>
+    <div class="bat-ear left"></div>
+    <div class="bat-ear right"></div>
 
 </div>
+
+
+<!-- =======================================================
+     MAIN DAILY MESSAGE
+======================================================= -->
+
+<main class="main">
+
+    <div class="title">
+        Little Bat Blessings
+    </div>
+
+    <div class="subtitle">
+        a tiny bit of comfort for today
+    </div>
+
+    <p
+        class="quote"
+        id="dailyQuote">
+    </p>
+
+    <div
+        class="date"
+        id="date">
+    </div>
+
+    <div
+        class="time"
+        id="time">
+    </div>
+
+</main>
+
+
+<!-- =======================================================
+     LITTLE BAT FRIEND
+======================================================= -->
+
+<div class="bat-friend"
+     id="batFriend">
+
+
+    <!-- CLICK THIS -->
+    <button
+        class="thought"
+        id="thoughtBubble"
+        aria-label="Feeling extra down today?">
+
+        feeling extra down today?
+
+    </button>
+
+
+    <!-- BAT -->
+
+    <div class="friend-body">
+
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+
+        <div class="smile"></div>
+
+    </div>
+
+
+    <!-- HIDDEN UNTIL CLICKED -->
+
+    <div
+        class="advice"
+        id="dailyAdvice">
+    </div>
+
+</div>
+
 
 <script>
 
+
+/* =========================================================
+   START DATE
+========================================================= */
+
+/*
+   May 13, 2026 is Day 1.
+
+   Every calendar day after that receives the next
+   message.
+
+   There is no random selection.
+*/
+
+const startDate =
+    new Date(2026, 4, 13);
+
+
+/* =========================================================
+   MAIN DAILY QUOTES
+========================================================= */
+
 const quotes = [
 
-"Small steps still count as magic.",
+    "You don't have to have everything figured out. You only have to make it through this moment.",
 
-"You survived every difficult day that once felt impossible.",
+    "You are allowed to move slowly. Slow is still moving.",
 
-"Rest is not weakness. Even the moon takes phases.",
+    "Some days surviving is the bravest thing you can do.",
 
-"Your softness is not something to apologize for.",
+    "You deserve the same kindness you so easily give to everyone else.",
 
-"The world is brighter because you are still in it.",
+    "You haven't failed just because today is difficult.",
 
-"You deserve gentle mornings and peaceful nights.",
+    "Even the smallest spark can push back a lot of darkness.",
 
-"Even wilted flowers bloom again with care.",
+    "You are not behind. Your path was never supposed to look like everyone else's.",
 
-"You are allowed to grow slowly.",
+    "Resting does not erase your progress.",
 
-"Being different is part of your enchantment.",
+    "You are allowed to have a soft heart in a hard world.",
 
-"One calm breath can change an entire moment.",
+    "There are still beautiful moments waiting for you.",
 
-"Not every storm comes to destroy you.",
+    "You made it through days you once thought you couldn't. Don't forget that.",
 
-"You are more loved than your mind lets you believe.",
+    "You don't need to be productive to be worthy.",
 
-"Some days surviving is the victory.",
+    "A bad day is not a bad life.",
 
-"The universe has not given up on you.",
+    "You are allowed to begin again as many times as you need.",
 
-"Quiet people still leave loud magic behind.",
+    "Even when you cannot see your own light, someone else may still be warmed by it.",
 
-"You do not need permission to exist beautifully.",
+    "Your existence does not need to be justified.",
 
-"Healing is messy and still worth it.",
+    "You can take life one tiny piece at a time.",
 
-"There is tenderness waiting in your future.",
+    "The fact that you are still trying matters.",
 
-"You are not behind in life.",
+    "You are more than the things that hurt you.",
 
-"The stars would miss you if you disappeared.",
+    "There is nothing weak about needing a little extra gentleness.",
 
-"Joy can exist beside sadness.",
+    "You don't have to earn rest.",
 
-"Your heart has carried you this far already.",
+    "Tomorrow does not need to be solved tonight.",
 
-"Even tired souls deserve beautiful things.",
+    "You are still becoming. Give yourself time.",
 
-"Hope can be tiny and still powerful.",
+    "It is okay if your best looks different today.",
 
-"You are allowed to take up space.",
+    "You are allowed to protect your peace.",
 
-"Darkness does not erase your light.",
+    "Darkness is a place light can still reach.",
 
-"The fact that you keep trying matters.",
+    "You are worthy on your productive days and your quiet days.",
 
-"You are becoming someone your younger self needed.",
+    "One breath. One moment. One little step.",
 
-"Magic lives in staying alive another day.",
+    "You don't have to shine brightly every day. A tiny glow is enough.",
 
-"The night sky never apologizes for being dark."
+    "There is still room for good things to find you.",
+
+    "You belong here.",
+
+    "You have permission to be a work in progress.",
+
+    "Your story is not finished because this chapter hurts.",
+
+    "Gentle progress is still progress.",
+
+    "You are allowed to hope for better days.",
+
+    "You don't have to carry everything at once.",
+
+    "The night is not proof that morning won't come.",
+
+    "You are doing better than you think.",
+
+    "You are allowed to take up space in this world.",
+
+    "Your feelings are visitors, not permanent residents.",
+
+    "There is courage in simply continuing.",
+
+    "You are not a burden for needing care.",
+
+    "Something beautiful can grow from a very difficult season.",
+
+    "You deserve moments that make your heart feel lighter.",
+
+    "You don't have to be fearless. You only have to keep going.",
+
+    "Your future self is rooting for you.",
+
+    "You are allowed to choose yourself sometimes.",
+
+    "Even tired wings can eventually fly again.",
+
+    "You are still here. That counts for something.",
+
+    "Be patient with the version of you who is trying to heal.",
+
+    "You don't need to know the whole road. Just the next step.",
+
+    "There is no shame in starting over.",
+
+    "You are not too much.",
+
+    "You are not too little.",
+
+    "You are enough exactly where you are.",
+
+    "The world needs the strange, soft, wonderful things that make you you.",
+
+    "Your life can contain both sadness and beautiful things.",
+
+    "You deserve a future that feels safe to your heart.",
+
+    "Keep a tiny bit of hope. You don't have to carry a whole bucket of it.",
+
+    "You are allowed to be proud of yourself for surviving.",
+
+    "Some flowers bloom at night.",
+
+    "You don't have to compare your chapter to someone else's.",
+
+    "Your pace is still a pace.",
+
+    "There is no expiration date on becoming who you want to be.",
+
+    "You can be tired and still be brave.",
+
+    "The little things count more than you realize.",
+
+    "You deserve tenderness without having to ask for it.",
+
+    "Maybe today doesn't need to be amazing. Maybe it just needs to be gentle.",
+
+    "You have survived every version of yesterday so far.",
+
+    "Let yourself be human.",
+
+    "You are allowed to put down what was never yours to carry.",
+
+    "There are people who are grateful you exist.",
+
+    "You don't have to make yourself smaller to make someone else comfortable.",
+
+    "A quiet life can still be a beautiful life.",
+
+    "You are allowed to find joy in weird little things.",
+
+    "Your softness is a strength.",
+
+    "Keep going, little creature. You're doing better than you think.",
+
+    "The world is allowed to be complicated. So are you.",
+
+    "You deserve to feel safe being yourself.",
+
+    "Not every day has to teach you something. Some days can simply be lived.",
+
+    "You are allowed to be hopeful even if you're scared.",
+
+    "You don't have to turn your pain into something productive.",
+
+    "You are worth taking care of.",
+
+    "There is still magic in ordinary days.",
+
+    "You are not your worst moment.",
+
+    "You can rest without giving up.",
+
+    "Your heart has made it through a lot. Treat it gently.",
+
+    "One day you may look back and realize how far you came.",
+
+    "You deserve to stay.",
+
+    "You are allowed to believe that things can get better.",
+
+    "Even tiny victories deserve to be celebrated.",
+
+    "You don't have to have a reason to be proud of yourself.",
+
+    "Your existence is not an inconvenience.",
+
+    "You are allowed to make your life softer.",
+
+    "There is nothing wrong with needing a little extra time.",
+
+    "You are still worthy when you feel lost.",
+
+    "Take the pressure off. You are a person, not a machine.",
+
+    "You can start with one tiny good thing.",
+
+    "You deserve peaceful moments.",
+
+    "The future has not happened yet. Leave room for good surprises.",
+
+    "Keep going. Your story still has unwritten pages.",
+
+    "You are allowed to be hopeful and tired at the same time.",
+
+    "Sometimes the bravest thing is simply staying.",
+
+    "You matter, even when you don't feel like you do.",
+
+    "Be gentle with yourself today. You're carrying more than anyone can see."
 
 ];
 
-/* quote of the day */
 
-function getQuoteOfTheDay(){
+/* =========================================================
+   LITTLE BAT DAILY ADVICE
+========================================================= */
 
-    const today = new Date();
+const advice = [
 
-    const start = new Date(today.getFullYear(),0,0);
+    "Drink some water, unclench your shoulders, and take one slow breath. You don't have to fix everything right now.",
 
-    const diff = today - start;
+    "If today feels heavy, make your world smaller. Just focus on the next five minutes.",
 
-    const oneDay = 1000 * 60 * 60 * 24;
+    "Do one tiny thing that makes you feel safe or cozy. Tiny comfort still counts.",
 
-    const day = Math.floor(diff / oneDay);
+    "Talk to yourself like someone you love. You deserve that voice in your head.",
 
-    return quotes[day % quotes.length];
+    "Put down one thing that can wait until tomorrow.",
+
+    "Find something soft. A blanket, hoodie, pillow, or stuffed animal — whatever helps you feel safe.",
+
+    "You don't need to turn the whole day around. One peaceful moment is enough.",
+
+    "Go somewhere quiet for a few minutes if you can. You don't have to explain why.",
+
+    "Eat something if you haven't. Your body deserves care even when your brain is being mean.",
+
+    "Look around and name three things you can see. Come back to this moment.",
+
+    "Send a tiny 'I love you' to someone you trust. You don't need a big conversation.",
+
+    "Put on something that makes you feel like yourself.",
+
+    "If all you accomplish today is getting through it, that is still an accomplishment.",
+
+    "You are allowed to cancel unnecessary expectations today.",
+
+    "Open a window, look at the sky, and remember that the world keeps changing.",
+
+    "Take the pressure off. You don't have to impress anyone today.",
+
+    "Give yourself permission to be a little creature who needs rest.",
+
+    "You can cry if you need to. You don't have to hide every feeling.",
+
+    "Try making one corner of your space cozy. You only need to improve one little corner.",
+
+    "Tomorrow can have tomorrow's problems. Today only needs today.",
+
+    "If your brain is spiraling, come back to something physical: cold water, a blanket, a favorite smell, or slow breathing.",
+
+    "You don't have to solve your entire life while you're exhausted.",
+
+    "Put on your comfiest clothes. This is official bat business.",
+
+    "Remember: being overwhelmed does not mean you are incapable.",
+
+    "Find one tiny thing you are looking forward to, even if it is something silly.",
+
+    "You can take a break without asking permission.",
+
+    "The goal today is not perfection. The goal is kindness.",
+
+    "If nobody has told you lately: I'm glad you're here.",
+
+    "You don't need to make sadness disappear. You can simply sit beside it until it gets quieter.",
+
+    "Do something familiar. Familiar things can be little anchors when everything feels strange."
+
+];
+
+
+/* =========================================================
+   CALCULATE DAY
+========================================================= */
+
+function getDayNumber() {
+
+    const now =
+        new Date();
+
+    const today =
+        new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate()
+        );
+
+    const start =
+        new Date(
+            startDate.getFullYear(),
+            startDate.getMonth(),
+            startDate.getDate()
+        );
+
+    const difference =
+        today.getTime() -
+        start.getTime();
+
+    const day =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
+        );
+
+    return Math.max(0, day);
 }
 
-document.getElementById("quote").innerText =
-`"${getQuoteOfTheDay()}"`;
 
-/* live time */
+/* =========================================================
+   LOAD TODAY'S TWO MESSAGES
+========================================================= */
 
-function updateTime(){
+function updateDailyMessages() {
 
-    const now = new Date();
+    const dayNumber =
+        getDayNumber();
 
-    const options = {
 
-        weekday:'long',
-        year:'numeric',
-        month:'long',
-        day:'numeric'
-    };
+    /*
+       Main quote
 
-    document.getElementById("date").innerText =
-    now.toLocaleDateString(undefined, options);
+       One quote per calendar day.
+    */
 
-    document.getElementById("time").innerText =
-    now.toLocaleTimeString([],{
+    const quoteIndex =
+        dayNumber % quotes.length;
 
-        hour:'2-digit',
-        minute:'2-digit',
-        second:'2-digit'
-    });
+
+    document.getElementById(
+        "dailyQuote"
+    ).textContent =
+        quotes[quoteIndex];
+
+
+    /*
+       Little bat advice
+
+       Also one message per calendar day.
+
+       It does NOT change when clicked.
+       Clicking only reveals today's message.
+    */
+
+    const adviceIndex =
+        dayNumber % advice.length;
+
+
+    document.getElementById(
+        "dailyAdvice"
+    ).textContent =
+        advice[adviceIndex];
 }
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function updateDate() {
+
+    const now =
+        new Date();
+
+    const dateText =
+        now.toLocaleDateString(
+            undefined,
+            {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+    document.getElementById(
+        "date"
+    ).textContent =
+        dateText;
+}
+
+
+/* =========================================================
+   TIME
+========================================================= */
+
+function updateTime() {
+
+    const now =
+        new Date();
+
+    const timeText =
+        now.toLocaleTimeString(
+            undefined,
+            {
+                hour: "numeric",
+                minute: "2-digit"
+            }
+        );
+
+    document.getElementById(
+        "time"
+    ).textContent =
+        timeText;
+}
+
+
+/* =========================================================
+   LITTLE BAT CLICK
+========================================================= */
+
+const batFriend =
+    document.getElementById(
+        "batFriend"
+    );
+
+const thoughtBubble =
+    document.getElementById(
+        "thoughtBubble"
+    );
+
+
+thoughtBubble.addEventListener(
+    "click",
+    function() {
+
+        /*
+           This does NOT generate a new message.
+
+           It only reveals the message that was already
+           assigned to today's date.
+        */
+
+        batFriend.classList.add(
+            "show-advice"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+updateDailyMessages();
+
+updateDate();
 
 updateTime();
 
-setInterval(updateTime,1000);
+
+/* =========================================================
+   UPDATE CLOCK
+========================================================= */
+
+setInterval(
+    updateTime,
+    60000
+);
+
+
+/* =========================================================
+   CHECK FOR NEW DAY
+========================================================= */
+
+setInterval(
+    function() {
+
+        updateDailyMessages();
+
+        updateDate();
+
+    },
+    60000
+);
 
 </script>
 
 </body>
 </html>
+```
